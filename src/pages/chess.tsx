@@ -19,17 +19,22 @@ export default function ChessGame() {
 
   const handleMove = ({ sourceSquare, targetSquare }) => {
     if (!chess) return;
-
-    let move = chess.move({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: 'q' // always promote to a queen for example simplicity
-    });
-
-    // illegal move
-    if (move === null) return;
-    setFen(chess.fen());
+  
+    try {
+      let move = chess.move({
+        from: sourceSquare,
+        to: targetSquare,
+        promotion: 'q'
+      });
+  
+      // illegal move
+      if (move === null) return;
+      setFen(chess.fen());
+    } catch (error) {
+      console.log('Illegal move');
+    }
   };
+  
 
   return (
     <div>
