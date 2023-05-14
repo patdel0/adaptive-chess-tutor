@@ -27,13 +27,23 @@ export default function ChessGame() {
         promotion: 'q'
       });
   
-      // illegal move
       if (move === null) return;
+  
       setFen(chess.fen());
+  
+      if (chess.isCheckmate()) {
+        const winner = chess.turn() === 'w' ? 'BLACK' : 'WHITE';
+        console.log(`Game over, ${winner} is the winner.`);
+      }
+  
     } catch (error) {
       console.log('Illegal move');
     }
   };
+  
+  
+  
+  
   
 
   return (
